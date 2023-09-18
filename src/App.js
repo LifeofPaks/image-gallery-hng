@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import "./App.scss";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import Gallery from "./components/Gallery/Gallery";
+import { useState } from "react";
 
 function App() {
+
+  const [isSignedIn, setIsSignedIn] = useState(false)
+
+  const  signedIn = () =>{
+    setIsSignedIn(true)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="App">
+    
+      <Routes>
+        <Route path="/" element={<Gallery
+          isSignedIn={isSignedIn}
+          setIsSignedIn={setIsSignedIn}
+        />} />
+         <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} /> 
+      </Routes>
+    </main>
   );
 }
 
