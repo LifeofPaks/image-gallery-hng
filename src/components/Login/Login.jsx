@@ -33,8 +33,11 @@ const Login = ({ setIsSignedIn, isSignedIn }) => {
 
   const validateDemoEmail = () => {
     if (email !== demoEmail) {
-      setEmailError(true);
+      setTimeout(() =>{
+        setEmailError(true);
       setEmailErrorMsg("Invalid user credential");
+      }, 2000)
+      
       setDemoLogin(false);
     } else if(email === demoEmail) {
       setEmailError(false);
@@ -46,9 +49,12 @@ const Login = ({ setIsSignedIn, isSignedIn }) => {
 
   const validateDemoPassword = () => {
     if (password !== demoPassword) {
-      setPasswordError(true);
-      setPasswordErrMsg("Invalid user credential");
+      
       setDemoLogin(false);
+      setTimeout(() =>{
+        setPasswordError(true);
+      setPasswordErrMsg("Invalid user credential");
+      }, 2000)
     } else if(password === demoPassword){
       setPasswordError(false);
       setPasswordErrMsg("");
