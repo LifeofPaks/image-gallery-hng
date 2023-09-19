@@ -8,7 +8,7 @@ FUNCTIONALITIES
 
 - User authentication was implemented as well.
 - User can Login using Demo credentials to preview website 
-    Email : user@example.com"
+    Email : user@example.com
     Password : 1Password
 
 - Drag and drop (DND) functionality was also implemented
