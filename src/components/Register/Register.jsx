@@ -30,9 +30,7 @@ const Register = () => {
     return /\S+@\S+\.\S+/.test(email);
   };
 
-  // const isValidPassword = (password) => {
-  //   return /^[@#](?=.{7,13}$)(?=\w{7,13})(?=[^aeiou_]{7,13})(?=.*[A-Z])(?=.*\d)/.test(password)
-  // };
+
 
   let isValid;
   const confirmEmail = () => {
@@ -56,18 +54,15 @@ const Register = () => {
       setPasswordError(true);
       setPasswordErrMsg("This field is required");
       isValid = false;
-    }  else {
+
+    } else if(password === '1Password'){
       setPasswordError(false);
       setPasswordErrMsg("");
       isValid = true;
     }
   };
 
-  // else if (!isValidPassword(password)) {
-  //   setPasswordError(true);
-  //   setPasswordErrMsg("Whoops, make sure its a valid password");
-  //   isValid = false;
-  // }
+
 
   const register = (e) => {
     e.preventDefault();
