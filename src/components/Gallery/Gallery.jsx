@@ -70,15 +70,18 @@ const Gallery = ({ isSignedIn, setIsSignedIn }) => {
           />
         </div>
         <div className="profile">
+          <Link to='/register'>
           <img
             width="25"
             src="https://img.icons8.com/material-rounded/48/ffd700/user-male-circle.png"
             alt="user-male-circle"
           />
+          </Link>
+         
           {!isSignedIn && (
             <div className="btnWrapper">
               <button className="loginBtn">
-                <Link to={"/login"}>Login</Link>
+                <Link to={"/"}>Login</Link>
               </button>
               <button className="registerBtn">
                 <Link to={"/register"}>Register</Link>

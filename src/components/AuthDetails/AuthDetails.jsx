@@ -26,7 +26,7 @@ const AuthDetails = () => {
     const signOutUser = ()=>{
         signOut(auth).then(() =>{
             console.log('sign out successful')
-            navigate('/login')
+            navigate('/')
             
         }).catch((error) =>{
             console.log(error)

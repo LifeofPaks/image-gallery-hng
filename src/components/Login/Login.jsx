@@ -4,11 +4,12 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/Firebase";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = ({setIsSignedIn}) => {
+const Login = ({ setIsSignedIn, isSignedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMsg, setEmailErrorMsg] = useState("");
+  const [demoLogin, setDemoLogin] = useState(false);
 
   const [passwordError, setPasswordError] = useState(false);
   const [passwordErrMsg, setPasswordErrMsg] = useState("");
@@ -26,23 +27,40 @@ const Login = ({setIsSignedIn}) => {
     setPasswordError(false);
   };
 
-  const isValidEmail = (email) => {
-    return /\S+@\S+\.\S+/.test(email);
+  let isValid;
+  let demoPassword = "1Password";
+  let demoEmail = "user@example.com";
+
+  const validateDemoEmail = () => {
+    if (email !== demoEmail) {
+      setEmailError(true);
+      setEmailErrorMsg("Invalid user credential");
+      setDemoLogin(false);
+    } else {
+      setEmailError(false);
+      setEmailErrorMsg("");
+      setDemoLogin(true);
+    }
   };
 
+  const validateDemoPassword = () => {
+    if (password !== demoPassword) {
+      setPasswordError(true);
+      setPasswordErrMsg("Invalid user credential");
+      setDemoLogin(false);
+    } else {
+      setPasswordError(false);
+      setPasswordErrMsg("");
+      setDemoLogin(true);
+    }
+  };
 
-
-  let isValid;
   const confirmEmail = () => {
     if (email === "") {
       setEmailError(true);
       setEmailErrorMsg("This field is required");
       isValid = false;
-    } else if (!isValidEmail(email)) {
-      setEmailError(true);
-      setEmailErrorMsg("Whoops, make sure its an email");
-      isValid = false;
-    } else if(email === 'user@example.com') {
+    } else {
       setEmailError(false);
       setEmailErrorMsg("");
       isValid = true;
@@ -54,7 +72,7 @@ const Login = ({setIsSignedIn}) => {
       setPasswordError(true);
       setPasswordErrMsg("This field is required");
       isValid = false;
-    } else if(password === '1Password'){
+    } else {
       setPasswordError(false);
       setPasswordErrMsg("");
       isValid = true;
@@ -62,22 +80,29 @@ const Login = ({setIsSignedIn}) => {
   };
 
   const logIn = (e) => {
-      e.preventDefault();
+    e.preventDefault();
     confirmEmail();
     confirmPassword();
+    validateDemoEmail();
+    validateDemoPassword();
     if (isValid) {
-      navigate("/");
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           console.log(userCredential);
-          setIsSignedIn(true)
+          setIsSignedIn(true);
+          navigate("gallery");
         })
         .catch((error) => {
           console.log(error);
+          setIsSignedIn(false);
         });
     }
-  };
 
+    if (demoLogin) {
+      setIsSignedIn(true);
+      navigate("gallery");
+    }
+  };
 
   return (
     <div className="login">
@@ -85,7 +110,11 @@ const Login = ({setIsSignedIn}) => {
         <h1>Login</h1>
         <form onSubmit={logIn}>
           <div className={`inputWrapper ${emailError ? "error" : ""}`}>
-          <img width="16" src="https://img.icons8.com/ios-glyphs/90/ffd700/user--v1.png" alt="user--v1"/>
+            <img
+              width="16"
+              src="https://img.icons8.com/ios-glyphs/90/ffd700/user--v1.png"
+              alt="user--v1"
+            />
             <input
               type="email"
               placeholder="Enter your email"
@@ -96,7 +125,11 @@ const Login = ({setIsSignedIn}) => {
           </div>
 
           <div className={`inputWrapper ${passwordError ? "error" : ""}`}>
-          <img width="16" src="https://img.icons8.com/ios-glyphs/90/ffd700/private2.png" alt="private2"/>
+            <img
+              width="16"
+              src="https://img.icons8.com/ios-glyphs/90/ffd700/private2.png"
+              alt="private2"
+            />
             <input
               type="password"
               placeholder="Enter your password"

@@ -9,20 +9,17 @@ function App() {
 
   const [isSignedIn, setIsSignedIn] = useState(false)
 
-  const  signedIn = () =>{
-    setIsSignedIn(true)
-  }
 
 
   return (
     <main className="App">
     
       <Routes>
-        <Route path="/" element={<Gallery
+        <Route path="gallery" element={<Gallery
           isSignedIn={isSignedIn}
           setIsSignedIn={setIsSignedIn}
         />} />
-         <Route path="login" element={<Login isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn}/>} />
+         <Route path="/" element={<Login isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn}/>} />
         <Route path="register" element={<Register />} /> 
       </Routes>
     </main>

@@ -2,7 +2,7 @@
 export const nbaStars =[
     {   
         id: 1,
-        name: 'Lebron',
+        name: 'Lebron James',
         position: 'forward',
         team : 'Lakers',
         image: 'https://ca-times.brightspotcdn.com/dims4/default/7be9a77/2147483647/strip/true/crop/3548x2516+0+0/resize/1200x851!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fcf%2F67%2F74ef656743528f2f9f7ce02d8dc1%2Fla-photos-1staff-477386-sp-0107-lakers-knicks4-wjs.jpg',
@@ -76,7 +76,8 @@ export const nbaStars =[
         position: 'forward',
         team : '	Mavericks',
         image: 'https://cdn.vox-cdn.com/thumbor/zIQcK8PUj9d7eDLJ33dUZjIfFX4=/0x0:4789x3192/1200x800/filters:focal(1963x660:2729x1426)/cdn.vox-cdn.com/uploads/chorus_image/image/69163134/1231385418.0.jpg',
-        logo: 'https://assets.stickpng.com/images/58419cd6a6515b1e0ad75a68.png'
+        logo: 'https://logodownload.org/wp-content/uploads/2021/07/dallas-mavericks-logo-0.png'
+        
 
     },
 
@@ -155,7 +156,7 @@ export const nbaStars =[
         position: 'Guard' ,
         team : '	Mavericks',
         image: 'https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2023/06/1200/675/GettyImages-Kyrie-Irving-Mavericks-copy.jpg?ve=1&tl=1',
-        logo: 'https://assets.stickpng.com/images/58419cd6a6515b1e0ad75a68.png'
+        logo: 'https://logodownload.org/wp-content/uploads/2021/07/dallas-mavericks-logo-0.png'
 
     },
 

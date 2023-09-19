@@ -12,6 +12,7 @@ const Register = () => {
 
   const [passwordError, setPasswordError] = useState(false);
   const [passwordErrMsg, setPasswordErrMsg] = useState("");
+  const [showSignupMsg, setShowSignupMsg] = useState(false)
   const navigate = useNavigate();
 
   const handleEmail = (e) => {
@@ -46,6 +47,7 @@ const Register = () => {
       setEmailError(false);
       setEmailErrorMsg("");
       isValid = true;
+      setShowSignupMsg(true)
     }
   };
 
@@ -55,7 +57,7 @@ const Register = () => {
       setPasswordErrMsg("This field is required");
       isValid = false;
 
-    } else if(password === '1Password'){
+    } else {
       setPasswordError(false);
       setPasswordErrMsg("");
       isValid = true;
@@ -77,13 +79,12 @@ const Register = () => {
       .catch((error) => {
         console.log(error);
       });
-      navigate("/login");
     }
   };
 
   return (
     <div className="register">
-      <div className="container">
+      <div className={`container ${showSignupMsg ? 'hide' : ''}`}>
         <h1>Register</h1>
         <form onSubmit={register}>
           <div className={`inputWrapper ${emailError ? "error" : ""}`}>
@@ -113,9 +114,31 @@ const Register = () => {
 
         <p className="text">
           Log in
-          <Link to="/login">Here</Link> if you have an account
+          <Link to="/">Here</Link> if you have an account
         </p>
       </div>
+      {
+        showSignupMsg && 
+        <div className="signupMsg">
+        <div className="msgWrapper">
+        <div className="logo">
+          <img
+            width="30"
+            src="https://img.icons8.com/ios-filled/100/ffd700/dynamics-365.png"
+            alt="dynamics-365"
+          />
+        </div>
+          <h1>
+              Thanks for signing up
+          </h1>
+
+          <p className="m-1">Welcome to our community, we're happy to have you on board</p>
+          <p className="m-2"> Login <Link to='/'>Here</Link>  </p>
+          
+        </div>
+      </div>
+      }
+     
     </div>
   );
 };
