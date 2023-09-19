@@ -36,10 +36,11 @@ const Login = ({ setIsSignedIn, isSignedIn }) => {
       setEmailError(true);
       setEmailErrorMsg("Invalid user credential");
       setDemoLogin(false);
-    } else {
+    } else if(email === demoEmail) {
       setEmailError(false);
       setEmailErrorMsg("");
       setDemoLogin(true);
+      isValid= true
     }
   };
 
@@ -48,10 +49,11 @@ const Login = ({ setIsSignedIn, isSignedIn }) => {
       setPasswordError(true);
       setPasswordErrMsg("Invalid user credential");
       setDemoLogin(false);
-    } else {
+    } else if(password === demoPassword){
       setPasswordError(false);
       setPasswordErrMsg("");
       setDemoLogin(true);
+      isValid= true
     }
   };
 
@@ -64,6 +66,7 @@ const Login = ({ setIsSignedIn, isSignedIn }) => {
       setEmailError(false);
       setEmailErrorMsg("");
       isValid = true;
+      setDemoLogin(true)
     }
   };
 
@@ -76,9 +79,10 @@ const Login = ({ setIsSignedIn, isSignedIn }) => {
       setPasswordError(false);
       setPasswordErrMsg("");
       isValid = true;
+      setDemoLogin(true)
     }
   };
-
+  
   const logIn = (e) => {
     e.preventDefault();
     confirmEmail();
@@ -99,7 +103,6 @@ const Login = ({ setIsSignedIn, isSignedIn }) => {
     }
 
     if (demoLogin) {
-      setIsSignedIn(true);
       navigate("gallery");
     }
   };
