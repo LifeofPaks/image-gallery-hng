@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import {auth} from '../../config/Firebase'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
+import './AuthDetails.scss'
 
 const AuthDetails = () => {
     const [checkUser, setCheckUser] = useState(null)
+    const navigate = useNavigate()
 
     useEffect(() =>{
         const check = onAuthStateChanged(auth, (user) =>{
@@ -24,6 +26,8 @@ const AuthDetails = () => {
     const signOutUser = ()=>{
         signOut(auth).then(() =>{
             console.log('sign out successful')
+            navigate('/login')
+            
         }).catch((error) =>{
             console.log(error)
         })
@@ -35,8 +39,8 @@ const AuthDetails = () => {
         {
             checkUser && 
             <div className="signedIn">
-                <p>Signed In</p> : <p>Signed Out</p>
-                <button onClick={signOutUser} > <Link path='/login'>Log Out</Link></button>
+                <p>Signed In</p> 
+                <button onClick={signOutUser} > Log Out</button>
                 
                 </div>
         }

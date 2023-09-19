@@ -1,7 +1,10 @@
 @import '../../styles//Responsive.scss';
 .register{
     display: flex;
-    align-items: center;
+    padding-top: 9rem;
     justify-content: center;
     min-height: 100vh;
+    background-image: url('../../images//b1.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }

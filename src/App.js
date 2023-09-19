@@ -13,6 +13,7 @@ function App() {
     setIsSignedIn(true)
   }
 
+
   return (
     <main className="App">
     
@@ -21,7 +22,7 @@ function App() {
           isSignedIn={isSignedIn}
           setIsSignedIn={setIsSignedIn}
         />} />
-         <Route path="login" element={<Login />} />
+         <Route path="login" element={<Login isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn}/>} />
         <Route path="register" element={<Register />} /> 
       </Routes>
     </main>

@@ -1,7 +1,43 @@
 @import '../../styles//Responsive.scss';
 .authDetails{
-    p{
-        color: #ffd700;
-        font-size: 13px;
+    .signedIn{
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+
+        @include Tablet{
+            gap: 1.5rem;
+        }
+
+        @include Mobile{
+            gap: .3rem;
+        }
+
+        
+        p{
+            color: #ffd700;
+            font-size: 13px;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 2px;
+
+
+            @include Mobile{
+            font-size: 8px;
+            }
+        }
+
+        button{
+            background: #ffd700;
+            padding: .3rem 1rem;
+            border-radius: 30px;
+                color: #333;
+                font-size: 12px;
+
+                @include Mobile{
+                    font-size: 8px;
+                    }
+        }
     }
+  
 }

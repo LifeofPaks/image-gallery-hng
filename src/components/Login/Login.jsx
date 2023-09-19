@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/Firebase";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({setIsSignedIn}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -30,9 +30,9 @@ const Login = () => {
     return /\S+@\S+\.\S+/.test(email);
   };
 
-  const isValidPassword = (password) => {
-    return /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*_)(?!.* ).{8,16}$/.test(password)
-  };
+//   const isValidPassword = (password) => {
+//     return /^[@#](?=.{7,13}$)(?=\w{7,13})(?=[^aeiou_]{7,13})(?=.*[A-Z])(?=.*\d)/.test(password)
+//   };
 
   let isValid;
   const confirmEmail = () => {
@@ -56,10 +56,6 @@ const Login = () => {
       setPasswordError(true);
       setPasswordErrMsg("This field is required");
       isValid = false;
-    } else if (!isValidPassword(password)) {
-      setPasswordError(true);
-      setPasswordErrMsg("Whoops, make sure its a valid password");
-      isValid = false;
     } else {
       setPasswordError(false);
       setPasswordErrMsg("");
@@ -76,6 +72,7 @@ const Login = () => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           console.log(userCredential);
+          setIsSignedIn(true)
         })
         .catch((error) => {
           console.log(error);
@@ -83,13 +80,14 @@ const Login = () => {
     }
   };
 
+
   return (
     <div className="login">
       <div className="container">
         <h1>Login</h1>
         <form onSubmit={logIn}>
           <div className={`inputWrapper ${emailError ? "error" : ""}`}>
-          <img width="16" src="https://img.icons8.com/ios-glyphs/90/333333/user--v1.png" alt="user--v1"/>
+          <img width="16" src="https://img.icons8.com/ios-glyphs/90/ffd700/user--v1.png" alt="user--v1"/>
             <input
               type="email"
               placeholder="Enter your email"
@@ -100,7 +98,7 @@ const Login = () => {
           </div>
 
           <div className={`inputWrapper ${passwordError ? "error" : ""}`}>
-          <img width="16" src="https://img.icons8.com/ios-glyphs/90/333333/private2.png" alt="private2"/>
+          <img width="16" src="https://img.icons8.com/ios-glyphs/90/ffd700/private2.png" alt="private2"/>
             <input
               type="password"
               placeholder="Enter your password"

@@ -1,2 +1,14 @@
-$Table : 768;
+$Tablet : 768px;
 $Mobile : 475px;
+
+@mixin Tablet{
+    @media screen and (max-width: ($Tablet)) {
+        @content
+    }
+};
+
+@mixin Mobile{
+    @media screen and (max-width: ($Mobile)) {
+        @content
+    }
+}
