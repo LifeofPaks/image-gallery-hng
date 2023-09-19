@@ -41,17 +41,22 @@ const Gallery = ({ isSignedIn, setIsSignedIn }) => {
     setSearchResult(filterResults);
   }, [images, search]);
 
-  const onDragEnd = (e) => {
-    const { active, over } = e;
-    if (active.id === over.id) {
-      return;
-    }
 
-    setSearchResult((items) => {
-      const oldIndex = items.findIndex((item) => item.id === active.id);
-      const newIndex = items.findIndex((item) => item.id === over.id);
-      return arrayMove(items, oldIndex, newIndex);
-    });
+  const onDragEnd = (e) => {
+
+    if(isSignedIn){
+      const { active, over } = e;
+      if (active.id === over.id) {
+        return;
+      }
+  
+      setSearchResult((items) => {
+        const oldIndex = items.findIndex((item) => item.id === active.id);
+        const newIndex = items.findIndex((item) => item.id === over.id);
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  
   };
 
   return (
