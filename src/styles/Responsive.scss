@@ -1,5 +1,12 @@
+$Mini : 1024px;
 $Tablet : 768px;
 $Mobile : 475px;
+
+@mixin Mini{
+    @media screen and (max-width: ($Mini)) {
+        @content
+    }
+};
 
 @mixin Tablet{
     @media screen and (max-width: ($Tablet)) {
