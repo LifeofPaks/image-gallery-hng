@@ -95,6 +95,7 @@ const Gallery = ({ isSignedIn, setIsSignedIn }) => {
 
       <div className="title"></div>
 
+      <div className="infox">
       <form onSubmit={handleSearch} className="searchItems">
         <button>
           <img
@@ -110,6 +111,14 @@ const Gallery = ({ isSignedIn, setIsSignedIn }) => {
           onChange={handleOnchange}
         />
       </form>
+
+      {
+        isSignedIn ? <p>DRAG & DROP to shuffle Cards</p> :
+        <p> <span>REGISTER & LOGIN</span> with credentials to access the <span>DRAG & DROP</span> features</p>
+      }
+      </div>
+
+    
 
       <div className="galleryContainer">
         <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>

@@ -41,35 +41,42 @@
                 }
             }
 
-            .loginBtn{
-                a{
-                    color: #ffd700;
-                    text-decoration: underline;
-
-                    @include Mobile{
-                        font-size: 12px;
-                    }
-                }
-               
-            }
+            .btnWrapper{
+                display: flex;
+                align-items: center;
+                
+                .loginBtn{
+                    a{
+                        color: #ffd700;
+                        text-decoration: underline;
     
-            .registerBtn{
-                a{
-                    background: #ffd700;
-                    margin-left: 1rem;
-                    padding: .5rem 1rem;
-                    border-radius: 30px;
-                    color: #333;
-
-                    @include Mobile{
-                        padding: .3rem .8rem;
-                        font-size: 10px;
-                        margin-left: .7rem;
+                        @include Mobile{
+                            font-size: 12px;
+                        }
                     }
+                   
                 }
-              
+        
+                .registerBtn{
+                    a{
+                        background: #ffd700;
+                        margin-left: 1rem;
+                        padding: .5rem 1rem;
+                        border-radius: 30px;
+                        color: #333;
     
-            }
+                        @include Mobile{
+                            padding: .3rem .8rem;
+                            font-size: 10px;
+                            margin-left: .7rem;
+                        }
+                    }
+                  
+        
+                }
+            }   
+
+    
     
         }
 
@@ -101,43 +108,77 @@
 
     }
 
-    .searchItems{
-        border: 1px solid #ffd700;
-        padding: .8rem 1rem;
-        width: 300px;
-        margin-bottom: 2rem;
-        border-radius: 10px;
+    .infox{
+        width: 100%;
         display: flex;
         align-items: center;
-        gap: 0.7rem;
-        background-repeat: no-repeat;
+        margin-bottom: 2rem;
+        justify-content: space-between;
+        padding: 2rem;
         opacity: 0;
         animation: fadeIn 2s 2s forwards;
-        margin-inline: 2rem;
+
+        @include Tablet{
+            flex-direction: column;
+            gap: 1rem;
+
+        }
+        
+
+        p{
+            color: #ffd700;
+            letter-spacing: 2px;
+            font-size: 14px;
+            animation: pulse 2s 2s infinite;
 
 
         @include Tablet{
-            padding: .5rem .8rem;
+            text-align: center;
         }
 
-        @include Mobile{
-            width: 80%;
-            margin-inline: auto;
-
+            span{
+                font-size: 12px;
+                font-weight: bold;
+                letter-spacing: 3px;
+            }
         }
-
-
-        
-
-        input{
-            width: 100%;
-            color: #fff;
-
-            &::placeholder{
-                letter-spacing: 1px;
+        .searchItems{
+            border: 1px solid #ffd700;
+            padding: .8rem 1rem;
+            width: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            background-repeat: no-repeat;
+         
+    
+    
+            @include Tablet{
+                padding: .5rem .8rem;
+            }
+    
+            @include Mobile{
+                width: 80%;
+                margin-inline: auto;
+    
+            }
+    
+    
+            
+    
+            input{
+                width: 100%;
+                color: #fff;
+    
+                &::placeholder{
+                    letter-spacing: 1px;
+                }
             }
         }
     }
+
+    
 
     .galleryContainer{
         display: grid;
