@@ -188,8 +188,15 @@
         animation: fadeIn 2s 2s forwards;
         padding-inline: 2rem;
 
+        @include Mini{
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding-bottom: 2rem;
+        }
+
         @include Tablet{
             grid-template-columns: repeat(2, 1fr);
+            padding-inline: 4rem;
         }
 
         @include Mobile{
