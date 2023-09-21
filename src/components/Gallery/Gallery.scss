@@ -5,6 +5,16 @@
     min-height: 100vh;
     overflow: hidden;
 
+    .invalid{
+        color: #ffd700;
+        font-size: 14px;
+        width: 100%;
+        text-align: center;
+        margin-top: 7rem;
+        font-style: italic;
+        letter-spacing: 2px;
+    }
+
     @include Tablet{
         padding-bottom: 2rem;
     }

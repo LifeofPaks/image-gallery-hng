@@ -10,15 +10,14 @@ import {
   SortableContext,
   arrayMove,
   rectSwappingStrategy,
-  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-
 
 const Gallery = ({ isSignedIn, setIsSignedIn }) => {
   const [images, setImages] = useState([]);
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-
+  const [invalidSearch, setInvalidSearch] = useState("");
+  const [isValidSearch, setIsValidSearch] = useState(false);
 
   const handleOnchange = (e) => {
     setSearch(e.target.value);
@@ -39,24 +38,25 @@ const Gallery = ({ isSignedIn, setIsSignedIn }) => {
         card.team.toLowerCase().includes(search.toLowerCase())
     );
 
+    if (filterResults.length) {
+      setIsValidSearch(true);
+    } else {
+      setIsValidSearch(false);
+    }
     setSearchResult(filterResults);
   }, [images, search]);
 
-
   const onDragEnd = (e) => {
+    const { active, over } = e;
+    if (active.id === over.id) {
+      return;
+    }
 
-      const { active, over } = e;
-      if (active.id === over.id) {
-        return;
-      }
-  
-      setSearchResult((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id);
-        const newIndex = items.findIndex((item) => item.id === over.id);
-        return arrayMove(items, oldIndex, newIndex);
-      });
-
-  
+    setSearchResult((items) => {
+      const oldIndex = items.findIndex((item) => item.id === active.id);
+      const newIndex = items.findIndex((item) => item.id === over.id);
+      return arrayMove(items, oldIndex, newIndex);
+    });
   };
 
   return (
@@ -70,14 +70,14 @@ const Gallery = ({ isSignedIn, setIsSignedIn }) => {
           />
         </div>
         <div className="profile">
-          <Link to='/register'>
-          <img
-            width="25"
-            src="https://img.icons8.com/material-rounded/48/ffd700/user-male-circle.png"
-            alt="user-male-circle"
-          />
+          <Link to="/register">
+            <img
+              width="25"
+              src="https://img.icons8.com/material-rounded/48/ffd700/user-male-circle.png"
+              alt="user-male-circle"
+            />
           </Link>
-         
+
           {!isSignedIn && (
             <div className="btnWrapper">
               <button className="loginBtn">
@@ -96,39 +96,40 @@ const Gallery = ({ isSignedIn, setIsSignedIn }) => {
       <div className="title"></div>
 
       <div className="infox">
-      <form onSubmit={handleSearch} className="searchItems">
-        <button>
-          <img
-            width="20"
-            src="https://img.icons8.com/ios-filled/100/ffd700/search--v1.png"
-            alt="search--v1"
+        <form onSubmit={handleSearch} className="searchItems">
+          <button>
+            <img
+              width="20"
+              src="https://img.icons8.com/ios-filled/100/ffd700/search--v1.png"
+              alt="search--v1"
+            />
+          </button>
+          <input
+            type="text"
+            placeholder="Search Name or Team"
+            value={search}
+            onChange={handleOnchange}
           />
-        </button>
-        <input
-          type="text"
-          placeholder="Search Name or Team"
-          value={search}
-          onChange={handleOnchange}
-        />
-      </form>
+        </form>
 
- <p>DRAG & DROP to shuffle Cards</p> 
+        <p>DRAG & DROP to shuffle Cards</p>
       </div>
-
-    
-
-      <div className="galleryContainer">
-        <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
-          <SortableContext
-            items={searchResult}
-            strategy={rectSwappingStrategy}
-          >
-            {searchResult.map((item) => (
-              <Card item={item} key={item.id} />
-            ))}
-          </SortableContext>
-        </DndContext>
-      </div>
+      {isValidSearch ? (
+        <div className="galleryContainer">
+          <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+            <SortableContext
+              items={searchResult}
+              strategy={rectSwappingStrategy}
+            >
+              {searchResult.map((item) => (
+                <Card item={item} key={item.id} />
+              ))}
+            </SortableContext>
+          </DndContext>
+        </div>
+      ) : (
+        <h3 className="invalid">Invalid Search...</h3>
+      )}
 
       <Loader type="pacman" />
     </div>
