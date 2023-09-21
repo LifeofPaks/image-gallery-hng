@@ -110,6 +110,7 @@ const Login = ({ setIsSignedIn, isSignedIn }) => {
 
     if (demoLogin) {
       navigate("gallery");
+      setIsSignedIn(true);
     }
   };
 

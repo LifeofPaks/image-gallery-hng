@@ -9,6 +9,7 @@ import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   SortableContext,
   arrayMove,
+  rectSwappingStrategy,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 
@@ -44,7 +45,6 @@ const Gallery = ({ isSignedIn, setIsSignedIn }) => {
 
   const onDragEnd = (e) => {
 
-    if(isSignedIn){
       const { active, over } = e;
       if (active.id === over.id) {
         return;
@@ -55,7 +55,7 @@ const Gallery = ({ isSignedIn, setIsSignedIn }) => {
         const newIndex = items.findIndex((item) => item.id === over.id);
         return arrayMove(items, oldIndex, newIndex);
       });
-    }
+
   
   };
 
@@ -112,10 +112,7 @@ const Gallery = ({ isSignedIn, setIsSignedIn }) => {
         />
       </form>
 
-      {
-        isSignedIn ? <p>DRAG & DROP to shuffle Cards</p> :
-        <p> <span>REGISTER & LOGIN</span> with credentials to access the <span>DRAG & DROP</span> features</p>
-      }
+ <p>DRAG & DROP to shuffle Cards</p> 
       </div>
 
     
@@ -124,7 +121,7 @@ const Gallery = ({ isSignedIn, setIsSignedIn }) => {
         <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
           <SortableContext
             items={searchResult}
-            strategy={verticalListSortingStrategy}
+            strategy={rectSwappingStrategy}
           >
             {searchResult.map((item) => (
               <Card item={item} key={item.id} />

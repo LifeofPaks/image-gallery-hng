@@ -44,7 +44,7 @@
             .btnWrapper{
                 display: flex;
                 align-items: center;
-
+                
                 .loginBtn{
                     a{
                         color: #ffd700;
@@ -191,12 +191,6 @@
         @include Tablet{
             grid-template-columns: repeat(2, 1fr);
         }
-
-        @include Mini{
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-        }
-
 
         @include Mobile{
             grid-template-columns: repeat(1, 1fr);
